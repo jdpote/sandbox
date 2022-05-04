@@ -2,6 +2,8 @@ const express = require("express");
 const morgan = require("morgan");
 const bp = require("body-parser");
 
+const lib = require("./lib");
+
 const { urlencoded, json } = bp;
 
 const db = {
@@ -26,8 +28,10 @@ app.post("/todo", (req, res) => {
   res.json({ data: newTodo });
 });
 
-app.get("/user", (req, res) => {
+app.get("/user", async (req, res) => {
+  const user = await lib.getNewUser(1);
   // return user using lib mobule
+  return res.json({ user });
 });
 
 app.listen(8000, () => {
