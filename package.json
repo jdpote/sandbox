@@ -4,6 +4,7 @@
   "description": "server pipo",
   "scripts": {
     "start": "nodemon server.js",
+    "build": "node server.js",
     "test": "jest"
   },
   "main": "server.js",
