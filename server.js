@@ -1,29 +1,31 @@
-const http = require("http");
+const express = require("express");
+const morgan = require("morgan");
+const bp = require("body-parser");
 
-const server = http.createServer(function (req, res) {
-  console.log("pipi pipo");
-  if (req.method === "POST") {
-    console.log(req.headers);
-    let body = "";
+const { urlencoded, json } = bp;
 
-    req.on("data", (chunk) => {
-      body += chunk.toString();
-    });
+const db = {
+  todos: [],
+};
 
-    req.on("end", () => {
-      if (req.headers["content-type"] === "application/json") {
-        body = JSON.parse(body);
-      }
+const app = express();
 
-      console.log(body);
-      res.writeHead(201);
-      res.end("ok");
-    });
-  } else {
-    res.writeHead(200);
-    res.end("hello from my server");
-  }
+app.use(urlencoded({ extended: true }));
+app.use(json());
+app.use(morgan("dev"));
+
+app.get("/todo", (req, res) => {
+  res.json({ data: db.todos });
 });
 
-console.log("nik ta mere on http://localhost:3000");
-server.listen(3000);
+app.post("/todo", (req, res) => {
+  console.log(req.body);
+  const newTodo = { complete: false, id: Date.now(), text: req.body.text };
+  db.todos.push(newTodo);
+
+  res.json({ data: newTodo });
+});
+
+app.listen(8000, () => {
+  console.log("Server on http://localhost:8000");
+});
