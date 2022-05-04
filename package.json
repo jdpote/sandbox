@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server pipo",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "main": "server.js",
+  "author": "x and j",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
