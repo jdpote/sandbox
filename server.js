@@ -26,6 +26,10 @@ app.post("/todo", (req, res) => {
   res.json({ data: newTodo });
 });
 
+app.get("/user", (req, res) => {
+  // return user using lib mobule
+});
+
 app.listen(8000, () => {
   console.log("Server on http://localhost:8000");
 });
