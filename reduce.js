@@ -51,13 +51,15 @@ const newDevelopment = [
 
 // want to get a list of rooms where noone was present, i.e. where the room evaluates to false in the rooms aray of every character
 function notInRoom(char) {
-  char.rooms.reduce((temp, current) => {
+  const notVisited = char.rooms.reduce((temp, current) => {
     for (const prop in current) {
       if (!current[prop]) {
         temp.push(prop);
       }
     }
+    return temp;
   }, []);
+  return notVisited;
 }
 
 notInRoom(newDevelopment[0]);
